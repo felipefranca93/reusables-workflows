@@ -1,0 +1,19 @@
+name: Docker Build
+
+on:
+  workflow_call:
+    inputs:
+      docker-img-name:
+        required: true
+        type: string
+        description: 'Docker image name'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t ${{ github.inputs.docker-img-name }} .
